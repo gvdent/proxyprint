@@ -3,7 +3,7 @@
     <title>Proxy generator</title>
     <style>
       .root { width: 800px; overflow: auto; }
-      .frame{ width: 240px; height: 332; float: left; border: 1px solid black; margin: 5px; }
+      .frame{ width: 240px; height: 332; float: left; border: 1px solid black; margin: 5px; padding: 2px; } 
     </style>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   </head>
@@ -15,7 +15,7 @@
       var isdCard = {};
 
       var createCardDiv = function(card) {
-        return $('<div/>', {
+        var result = $('<div/>', {
           class: "card",
           html: [
             $("<div/>", {
@@ -33,9 +33,15 @@
             $("<div/>", {
               class: "text", 
               html: card.text
-            })
+            }),
+            card.hasOwnProperty("power") ? $("<div/>", {
+              class: "pt",
+              html: card.power + "/" + card.toughness
+            }) : "" 
           ]
         });
+
+        return result;
       }
 
       var loadContents = function() {
