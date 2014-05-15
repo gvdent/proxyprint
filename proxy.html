@@ -3,7 +3,7 @@
     <title>Proxy generator</title>
     <style>
       .root { width: 800px; overflow: auto; }
-      .card { width: 240px; height: 332; float: left; border: 1px solid black; margin: 5px; }
+      .frame{ width: 240px; height: 332; float: left; border: 1px solid black; margin: 5px; }
     </style>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   </head>
@@ -21,8 +21,14 @@
 
             $(".root").append(
               $('<div/>', {
-                class: "card",
-                html: card.name
+                class: "frame",
+                html: $('<div/>', {
+                  class: "card",
+                  html: $("<div/>", {
+                    class: "name", 
+                    html: card.name
+                  })
+                })
               })
             );
           }
