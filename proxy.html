@@ -1,0 +1,41 @@
+<html>
+  <head>
+    <title>Proxy generator</title>
+    <style>
+      .root { width: 800px; overflow: auto; }
+      .card { width: 240px; height: 332; float: left; border: 1px solid black; margin: 5px; }
+    </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="root">
+    </div>
+    <script>
+      var cards= [ "Ambush Viper", "Angel of Flight Alabaster", "Garruk Relentless" ];
+      var isdCard = {};
+
+      var loadContents = function() {
+        for(var i = 0; i < cards.length; i++) {
+          if(isdCard[cards[i]] !== "undefined") {
+            var card=isdCard[cards[i]];
+
+            $(".root").append('<div class="card">'+ card.name + '</div>');
+          }
+        }
+      }
+
+      var setData = function(data) {
+        console.log(data);
+        document.title = data.name;
+    
+        for(var i = 0; i < data.cards.length; i++) {
+          isdCard[data.cards[i].name] = data.cards[i]; 
+        }
+
+        loadContents();
+      }
+
+      $.getJSON('ISD.json', function(data) { setData(data) });
+    </script>
+  </body>
+</html>
