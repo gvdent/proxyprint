@@ -19,7 +19,12 @@
           if(isdCard[cards[i]] !== "undefined") {
             var card=isdCard[cards[i]];
 
-            $(".root").append('<div class="card">'+ card.name + '</div>');
+            $(".root").append(
+              $('<div/>', {
+                class: "card",
+                html: card.name
+              })
+            );
           }
         }
       }
