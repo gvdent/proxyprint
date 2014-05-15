@@ -15,6 +15,18 @@
       var isdCard = {};
 
       var createCardDiv = function(card) {
+        if(card.hasOwnProperty("names")) {
+          return $.merge(
+            createSingleCardDiv(isdCard[card.names[0]]),
+            createSingleCardDiv(isdCard[card.names[1]])
+          );
+          } else {
+          return createSingleCardDiv(card);
+        }
+
+      }
+
+      var createSingleCardDiv = function(card) {
         var result = $('<div/>', {
           class: "card",
           html: [
