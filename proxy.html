@@ -14,6 +14,30 @@
       var cards= [ "Ambush Viper", "Angel of Flight Alabaster", "Garruk Relentless" ];
       var isdCard = {};
 
+      var createCardDiv = function(card) {
+        return $('<div/>', {
+          class: "card",
+          html: [
+            $("<div/>", {
+              class: "name", 
+              html: card.name
+            }),
+            $("<div/>", {
+              class: "mana", 
+              html: card.manaCost
+            }),,
+            $("<div/>", {
+              class: "type", 
+              html: card.type
+            }),
+            $("<div/>", {
+              class: "text", 
+              html: card.text
+            })
+          ]
+        });
+      }
+
       var loadContents = function() {
         for(var i = 0; i < cards.length; i++) {
           if(isdCard[cards[i]] !== "undefined") {
@@ -22,13 +46,7 @@
             $(".root").append(
               $('<div/>', {
                 class: "frame",
-                html: $('<div/>', {
-                  class: "card",
-                  html: $("<div/>", {
-                    class: "name", 
-                    html: card.name
-                  })
-                })
+                html: createCardDiv(card)               
               })
             );
           }
