@@ -36,7 +36,7 @@
             }),
             $("<div/>", {
               class: "mana", 
-              html: card.manaCost
+              html: card.hasOwnProperty("manaCost") ? card.manaCost.replace("{", "").replace("}", "") : ""
             }),,
             $("<div/>", {
               class: "type", 
