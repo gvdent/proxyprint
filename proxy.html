@@ -52,7 +52,7 @@
             }),
             $("<div/>", {
               class: "text", 
-              html: card.text
+              html: card.text.replace(/\n+/g, "<br/>")
             }),
             card.hasOwnProperty("power") ? $("<div/>", {
               class: "power",
