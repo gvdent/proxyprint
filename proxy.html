@@ -20,7 +20,7 @@
     <div class="root">
     </div>
     <script>
-      var cards= [ "Ambush Viper", "Angel of Flight Alabaster", "Garruk Relentless" ];
+      var cards= [ "Ambush Viper", "Angel of Flight Alabaster", "Garruk Relentless", "Civilized Scholar" ];
       var isdCard = {};
 
       var createCardDiv = function(card) {
@@ -32,6 +32,22 @@
           } else {
           return createSingleCardDiv(card, true);
         }
+      }
+
+      var colorAbbreviations = { 
+           "White":  "W",
+           "Blue" :  "U",
+           "Black":  "B",
+           "Red":    "R",
+           "Green":  "G"
+      }
+        
+      var colorToSymbol = function(color) {
+        return colorAbbreviations[color];
+      }
+
+      var colorsToSymbols = function(colors) {
+        return $.map(colors,function(val) { return colorToSymbol(val) }).join(''); 
       }
 
       var createSingleCardDiv = function(card, fullheight) {
@@ -48,7 +64,7 @@
             }),,
             $("<div/>", {
               class: "type", 
-              html: card.type
+              html: (card.hasOwnProperty("manaCost") ? "" : colorsToSymbols(card.colors) + " ") + card.type
             }),
             $("<div/>", {
               class: "text", 
