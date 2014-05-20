@@ -122,14 +122,17 @@ Civilized Scholar
 
       var setData = function(data) {
         document.title = data.name;
-    
-        for(var i = 0; i < data.cards.length; i++) {
-          isdCard[data.cards[i].name] = data.cards[i]; 
-        }
+
+        $.each(data, function(ab, set) {
+          $.each(set.cards, function(i, card) {
+            if (typeof isdCard[card.name] === "undefined")
+              isdCard[card.name] = card; 
+          })
+        });
       }
 
       $(document).ready(function() {
-        $.getJSON('ISD.json', function(data) { setData(data) });
+        $.getJSON('AllSets.json', function(data) { setData(data) });
 
         $("#cardsInput").submit(function(event) { 
           event.preventDefault();
