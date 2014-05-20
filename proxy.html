@@ -95,18 +95,19 @@ Civilized Scholar
 
       var loadContents = function() {
         var cards = $.map($("#cardsTextArea")[0].value.split("\n"), function(x) { var result = x.trim(); if (result.length > 0) return result; });
-        for(var i = 0; i < cards.length; i++) {
-          if(isdCard[cards[i]] !== "undefined") {
-            var card=isdCard[cards[i]];
-
+        $.each(cards, function(i, inputCard) {
+          var card=isdCard[inputCard];
+          if(typeof card !== "undefined") {
             $("#root").append(
               $('<div/>', {
                 class: "frame",
                 html: createCardDiv(card)               
               })
             );
+          } else {
+            throw "Card not found: " + inputCard;
           }
-        }
+        });
       }
 
       var setData = function(data) {
@@ -127,6 +128,9 @@ Civilized Scholar
             loadContents(); 
             $("#input").addClass("hidden");
             $("#root").removeClass("hidden");
+          }
+          catch (error) {
+            alert(error);
           }
           finally {
             return false;
