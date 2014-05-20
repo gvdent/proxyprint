@@ -3,7 +3,7 @@
     <meta charset="utf-8">
     <title>Proxy generator</title>
     <style>
-      .root { width: 800px; overflow: auto; }
+      #root { width: 800px; overflow: auto; }
       .frame{ width: 240px; height: 332; float: left; border: 1px solid black; margin: 5px; padding: 2px; } 
       .card { position: relative; border: 1px solid gray; }
       .fullheight { height: 99%; }
@@ -14,14 +14,26 @@
       .type { position: absolute; top: 20px; width: 100%; }
       .text { position: absolute; top: 40px; }
       .power { position: absolute; bottom: 0px; right: 0px; }
+      .hidden { display: none; }
+      #cardsTextArea { height: 500px; width: 400px; }
     </style>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   </head>
   <body>
-    <div class="root">
+    <div id="input">
+      <form id="cardsInput">
+        <textarea id="cardsTextArea">
+Ambush Viper
+Angel of Flight Alabaster
+Garruk Relentless
+Civilized Scholar
+        </textarea>
+        <input type="submit" name="subby"/>
+      </form>
+    </div> 
+    <div id="root" class="hidden">
     </div>
     <script>
-      var cards= [ "Ambush Viper", "Angel of Flight Alabaster", "Garruk Relentless", "Civilized Scholar" ];
       var isdCard = {};
 
       var createCardDiv = function(card) {
@@ -82,11 +94,12 @@
       }
 
       var loadContents = function() {
+        var cards = $.map($("#cardsTextArea")[0].value.split("\n"), function(x) { var result = x.trim(); if (result.length > 0) return result; });
         for(var i = 0; i < cards.length; i++) {
           if(isdCard[cards[i]] !== "undefined") {
             var card=isdCard[cards[i]];
 
-            $(".root").append(
+            $("#root").append(
               $('<div/>', {
                 class: "frame",
                 html: createCardDiv(card)               
@@ -102,11 +115,24 @@
         for(var i = 0; i < data.cards.length; i++) {
           isdCard[data.cards[i].name] = data.cards[i]; 
         }
-
-        loadContents();
       }
 
-      $.getJSON('ISD.json', function(data) { setData(data) });
+      $(document).ready(function() {
+        $.getJSON('ISD.json', function(data) { setData(data) });
+
+        $("#cardsInput").submit(function(event) { 
+          event.preventDefault();
+          
+          try {
+            loadContents(); 
+            $("#input").addClass("hidden");
+            $("#root").removeClass("hidden");
+          }
+          finally {
+            return false;
+          }
+        });
+      });
     </script>
   </body>
 </html>
