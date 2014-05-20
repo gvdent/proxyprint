@@ -96,14 +96,24 @@ Civilized Scholar
       var loadContents = function() {
         var cards = $.map($("#cardsTextArea")[0].value.split("\n"), function(x) { var result = x.trim(); if (result.length > 0) return result; });
         $.each(cards, function(i, inputCard) {
+          var cardSplit = inputCard.split(" ");
+          var count = parseInt(cardSplit[0]);
+          if (isNaN(count)) {
+            count = 1;
+          } else {
+            inputCard = cardSplit.slice(1).join(" ");
+          }
+
           var card=isdCard[inputCard];
           if(typeof card !== "undefined") {
-            $("#root").append(
-              $('<div/>', {
-                class: "frame",
-                html: createCardDiv(card)               
-              })
-            );
+            for(var j = 0; j < count; j++) {
+              $("#root").append(
+                $('<div/>', {
+                  class: "frame",
+                  html: createCardDiv(card)
+                })
+              );
+            }
           } else {
             throw "Card not found: " + inputCard;
           }
