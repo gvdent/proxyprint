@@ -77,11 +77,11 @@ Civilized Scholar
             }),,
             $("<div/>", {
               class: "type", 
-              html: (card.hasOwnProperty("manaCost") ? "" : colorsToSymbols(card.colors) + " ") + card.type
+              html: (card.hasOwnProperty("manaCost") || !card.hasOwnProperty("colors") ? "" : colorsToSymbols(card.colors) + " ") + card.type
             }),
             $("<div/>", {
               class: "text", 
-              html: card.text.replace(/\n+/g, "<br/>")
+              html: card.hasOwnProperty("text") ? card.text.replace(/\n+/g, "<br/>") : ""
             }),
             card.hasOwnProperty("power") || card.hasOwnProperty("loyalty") ? $("<div/>", {
               class: "power",
