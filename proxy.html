@@ -81,7 +81,7 @@ Civilized Scholar
             }),
             $("<div/>", {
               class: "text", 
-              html: card.hasOwnProperty("text") ? card.text.replace(/\n+/g, "<br/>") : ""
+              html: card.hasOwnProperty("text") ? card.text.replace(/\n+/g, "<br/>").replace(/[{}]/g, "") : ""
             }),
             card.hasOwnProperty("power") || card.hasOwnProperty("loyalty") ? $("<div/>", {
               class: "power",
