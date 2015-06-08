@@ -132,7 +132,7 @@ Civilized Scholar
       }
 
       $(document).ready(function() {
-        $.getJSON('AllSets.json', function(data) { setData(data) });
+        $.getJSON('http://mtgjson.com/json/AllCards.json', function(data) { setData(data) });
 
         $("#cardsInput").submit(function(event) { 
           event.preventDefault();
