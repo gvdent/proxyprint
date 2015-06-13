@@ -43,6 +43,7 @@ Bushi Tenderfoot
       </form>
     </div> 
     <div id="root" class="hidden">
+      <div id="back"><a href="#asdfasdf" onClick="backToInput(); return false">Back to input</a></div>
     </div>
     <script>
       var isdCard = {};
@@ -139,6 +140,11 @@ Bushi Tenderfoot
           if (typeof isdCard[name] === "undefined")
             isdCard[card.name] = card; 
         })
+      }
+
+      var backToInput = function() {
+        $("#input").removeClass("hidden");
+        $("#root").addClass("hidden");
       }
 
       $(document).ready(function() {
