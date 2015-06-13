@@ -130,8 +130,7 @@ Civilized Scholar
       $(document).ready(function() {
         $.ajax({
           type: 'GET',
-          // url:  "//mtgjson.com/json/AllCards.json",
-          url: "AllCards.json",
+          url:  "//mtgjson.com/json/AllCards.json",
           dataType: "json",
           success: function(response) {
             setData(response);
