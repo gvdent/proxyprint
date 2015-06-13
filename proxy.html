@@ -121,18 +121,22 @@ Civilized Scholar
       }
 
       var setData = function(data) {
-        document.title = data.name;
-
-        $.each(data, function(ab, set) {
-          $.each(set.cards, function(i, card) {
-            if (typeof isdCard[card.name] === "undefined")
-              isdCard[card.name] = card; 
-          })
-        });
+        $.each(data, function(name, card) {
+          if (typeof isdCard[name] === "undefined")
+            isdCard[card.name] = card; 
+        })
       }
 
       $(document).ready(function() {
-        $.getJSON('//mtgjson.com/json/AllCards.json', function(data) { setData(data) });
+        $.ajax({
+          type: 'GET',
+          // url:  "//mtgjson.com/json/AllCards.json",
+          url: "AllCards.json",
+          dataType: "json",
+          success: function(response) {
+            setData(response);
+          }
+        });
 
         $("#cardsInput").submit(function(event) { 
           event.preventDefault();
