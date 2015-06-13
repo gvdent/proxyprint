@@ -9,6 +9,7 @@
       .fullheight { height: 99%; }
       .halfheight { height: 49%; margin-bottom: 2px; }
       .halfheight .text { font-size: 11px }
+      .flip { transform: rotate(180deg); }
       .name { position: absolute; top: 0px; left: 0px; }
       .mana { position: absolute; top: 0px; right: 0px; }
       .type { position: absolute; top: 20px; width: 100%; font-size: 11px; }
@@ -36,6 +37,7 @@ Angel of Flight Alabaster
 Garruk Relentless
 Civilized Scholar
 4 Black Lotus
+Bushi Tenderfoot
         </textarea>
         <input type="submit" name="subby"/>
       </form>
@@ -49,7 +51,7 @@ Civilized Scholar
         if(card.hasOwnProperty("names")) {
           return $.merge(
             createSingleCardDiv(isdCard[card.names[0]], false),
-            createSingleCardDiv(isdCard[card.names[1]], false)
+            createSingleCardDiv(isdCard[card.names[1]], false, card.layout)
           );
           } else {
           return createSingleCardDiv(card, true);
@@ -72,7 +74,7 @@ Civilized Scholar
         return $.map(colors,function(val) { return colorToSymbol(val) }).join(''); 
       }
 
-      var createSingleCardDiv = function(card, fullheight) {
+      var createSingleCardDiv = function(card, fullheight, layout) {
         var result = $('<div/>', {
           class: "card " + (fullheight? "fullheight" : "halfheight"),
           html: [
@@ -98,6 +100,9 @@ Civilized Scholar
             }) : "" 
           ]
         });
+
+        if(layout == "flip")         
+          result.addClass("flip");
 
         return result;
       }
