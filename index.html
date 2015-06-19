@@ -150,8 +150,9 @@ Bushi Tenderfoot
       $(document).ready(function() {
         $.ajax({
           type: 'GET',
-          url:  "//mtgjson.com/json/AllCards.json",
-          dataType: "json",
+          url:  "//mtgjson.com/json/AllCards.jsonp",
+          dataType: "jsonp",
+          cache: true,
           success: function(response) {
             setData(response);
           }
