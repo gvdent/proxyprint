@@ -141,22 +141,16 @@ Bushi Tenderfoot
         })
       }
 
-      var backToInput = function() {
+      window.mtgjsoncallback = function(data, name) {
+        setData(data);
+      }
+
+     var backToInput = function() {
         $("#input").removeClass("hidden");
         $("#root").addClass("hidden");
       }
 
       $(document).ready(function() {
-        $.ajax({
-          type: 'GET',
-          url:  "//mtgjson.com/json/AllCards.jsonp",
-          dataType: "jsonp",
-          cache: true,
-          success: function(response) {
-            setData(response);
-          }
-        });
-
         $("#cardsInput").submit(function(event) { 
           event.preventDefault();
           
@@ -174,5 +168,6 @@ Bushi Tenderfoot
         });
       });
     </script>
+    <script type="text/javascript" src="//mtgjson.com/json/AllSets.jsonp"></script>
   </body>
 </html>
